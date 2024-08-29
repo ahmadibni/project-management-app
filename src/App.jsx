@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar.jsx";
 import NewProject from "./components/NewProject.jsx";
 
-const projects = {
+const PROJECT_MODEL = {
   title: null,
   description: null,
   duedate: null,
@@ -16,7 +16,7 @@ function App() {
   }
 
   function handleSaveProjectClick() {
-    projects.title = titleRef
+    PROJECT_MODEL.title = titleRef
   }
 
   return (
