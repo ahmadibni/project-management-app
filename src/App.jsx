@@ -52,6 +52,18 @@ function App() {
     });
   }
 
+  function handleDeleteProject(projectID) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projects: prevState.projects.filter(
+          (project) => project.id !== projectID
+        ),
+        selectedProject: null,
+      };
+    });
+  }
+
   let content;
 
   if (projectState.selectedProject === "add") {
@@ -64,10 +76,14 @@ function App() {
   } else if (projectState.selectedProject === null) {
     content = <NoProjectSelected handleClick={handleAddProjectClick} />;
   } else {
-    content = <DetailProject />
+    const projectID = projectState.selectedProject;
+    const selectedProject = projectState.projects.find(
+      (project) => project.id === projectID
+    );
+    content = (
+      <DetailProject project={selectedProject} onDelete={handleDeleteProject} />
+    );
   }
-
-  console.log(projectState.projects);
 
   return (
     <main className="h-screen my-8 flex gap-8">
