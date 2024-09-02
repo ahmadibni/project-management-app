@@ -1,4 +1,5 @@
 import noProjectImage from "../assets/no-projects.png";
+import Button from "./Button";
 
 const NoProjectSelected = ({ handleClick }) => {
   return (
@@ -15,12 +16,11 @@ const NoProjectSelected = ({ handleClick }) => {
         Select a project or get started with a new one
       </p>
       <p className="mt-8">
-        <button
+        <Button
           onClick={handleClick}
-          className="w-auto mt-6 py-2 px-4 bg-stone-800 text-stone-400 rounded-md hover:bg-stone-700 hover:text-stone-200"
         >
           Create new project
-        </button>
+        </Button>
       </p>
     </div>
   );

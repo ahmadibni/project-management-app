@@ -3,31 +3,77 @@ import Sidebar from "./components/Sidebar.jsx";
 import NewProject from "./components/NewProject.jsx";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
 
-const PROJECT_MODEL = {
-  title: null,
-  description: null,
-  duedate: null,
-};
-
 function App() {
-  const [addProject, setAddProject] = useState(false);
+  const [projectState, setProjectState] = useState({
+    selectedProject: null,
+    projects: [],
+  });
 
   function handleAddProjectClick() {
-    setAddProject(true);
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: "add",
+      };
+    });
   }
 
   function handleCancelProjectClick() {
-    setAddProject(false);
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: null,
+      };
+    });
   }
 
-  function handleSaveProjectClick() {
-    PROJECT_MODEL.title = titleRef
+  function handleSelectProject(projectID) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: projectID,
+      };
+    });
   }
+
+  function handleSaveProject(projectData) {
+    const newProject = {
+      id: Date.now(),
+      ...projectData,
+    };
+
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProject: null,
+        projects: [...prevState.projects, newProject],
+      };
+    });
+  }
+
+  let content;
+
+  if (projectState.selectedProject === "add") {
+    content = (
+      <NewProject
+        onSaveProject={handleSaveProject}
+        handleCancelClick={handleCancelProjectClick}
+      />
+    );
+  } else if (projectState.selectedProject === null) {
+    content = <NoProjectSelected handleClick={handleAddProjectClick} />;
+  }
+
+  console.log(projectState.projects);
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <Sidebar handleClick={handleAddProjectClick} />
-      {addProject ? <NewProject handleClick={handleSaveProjectClick} /> : <NoProjectSelected handleClick={handleAddProjectClick}/>}
+      <Sidebar
+        onAddProject={handleAddProjectClick}
+        onSelectProject={handleSelectProject}
+        projects={projectState.projects}
+      />
+      {content}
     </main>
   );
 }
