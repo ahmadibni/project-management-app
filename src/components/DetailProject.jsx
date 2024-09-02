@@ -26,7 +26,7 @@ const DetailProject = ({ project, onDelete }) => {
       return;
     }
     setAddTask((prevState) => [...prevState, newTask]);
-    input.current.value = ""; // Clear the input field after adding the task
+    input.current.value = "";
   }
 
   function handleDeleteTask(taskIndex) {
