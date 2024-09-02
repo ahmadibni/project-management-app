@@ -1,4 +1,4 @@
-export default function Button({ children, ...props }) {
+const Button = ({ children, ...props }) => {
   return (
     <button
       {...props}
@@ -7,4 +7,6 @@ export default function Button({ children, ...props }) {
       {children}
     </button>
   );
-}
+};
+
+export default Button;

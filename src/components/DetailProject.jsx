@@ -1,5 +1,12 @@
 const DetailProject = () => {
-  return <div>
-    
-  </div>;
+  return (
+    <div>
+      <header>
+        <h2>Title</h2>
+      </header>
+      TASK
+    </div>
+  );
 };
+
+export default DetailProject;

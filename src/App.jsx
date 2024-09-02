@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar.jsx";
 import NewProject from "./components/NewProject.jsx";
 import NoProjectSelected from "./components/NoProjectSelected.jsx";
+import DetailProject from "./components/DetailProject.jsx";
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -57,11 +58,13 @@ function App() {
     content = (
       <NewProject
         onSaveProject={handleSaveProject}
-        handleCancelClick={handleCancelProjectClick}
+        onCancel={handleCancelProjectClick}
       />
     );
   } else if (projectState.selectedProject === null) {
     content = <NoProjectSelected handleClick={handleAddProjectClick} />;
+  } else {
+    content = <DetailProject />
   }
 
   console.log(projectState.projects);
